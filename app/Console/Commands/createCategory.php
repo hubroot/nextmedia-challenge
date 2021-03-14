@@ -39,7 +39,15 @@ class createCategory extends Command
     public function handle()
     {
         do {
-            $name = $this->ask('Enter category name');
+            $name = null;
+            do {
+                $name = $this->ask('Enter category name');
+                if (!$name) {
+                    continue;
+                }
+
+                break;
+            } while (true);
 
             if (Category::whereName($name)->count()) {
                 $this->error('This category already exists!');
