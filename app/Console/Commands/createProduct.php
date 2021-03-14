@@ -39,12 +39,31 @@ class createProduct extends Command
     public function handle()
     {
         do {
-            $name = $this->ask('Enter product name');
+            $name = null;
+            do {
+                $name = $this->ask('Enter product name');
+                if (!$name) {
+                    continue;
+                }
+
+                break;
+            } while (true);
 
             if (Product::whereName($name)->count()) {
                 $this->error('This product already exists!');
                 continue;
             }
+
+            $descriptio = $this->ask('Enter product description');
+
+            $price = null;
+            do {
+                $price = $this->ask('Enter product price');
+                if ($price && !is_numeric($price)) {
+                    continue;
+                }
+                break;
+            } while (true);
 
             Product::create([
                 'name' => $name,
