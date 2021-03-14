@@ -39,7 +39,7 @@ class createProduct extends Command
     public function handle()
     {
         do {
-            $name = $this->ask('Enter product name :');
+            $name = $this->ask('Enter product name');
 
             if (Product::whereName($name)->count()) {
                 $this->error('This product already exists!');
