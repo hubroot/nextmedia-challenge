@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col">
-            <list-products></list-products>
+            <list-products :products="{{ $products }}" :categories="{{ $categories }}"></list-products>
         </div>
     </div>
 </div>
