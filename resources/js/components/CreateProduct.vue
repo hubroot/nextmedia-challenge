@@ -7,7 +7,10 @@
 
           <div class="card-body">
             <div class="alert alert-danger" v-show="error" v-html="error"></div>
-            <div class="alert alert-success" v-show="success">The product <b>{{ form.product }}</b> has been successfully created.</div>
+            <div class="alert alert-success" v-show="success">
+              The product <b>{{ form.product }}</b> has been successfully
+              created.
+            </div>
             <form method="post" action="" @submit.prevent="create">
               <div class="form-group row">
                 <label for="name" class="col-4 col-form-label">Name</label>
@@ -67,6 +70,7 @@
                     type="number"
                     class="form-control"
                     v-model="form.price"
+                    step="0.01"
                   />
                 </div>
               </div>
@@ -107,13 +111,13 @@ export default {
       axios
         .post('', this.form)
         .then((response) => {
-            this.success = true
+          this.success = true
         })
         .catch((error) => {
           this.error = `Error ${error.response.status} : ${error.response.statusText}`
           const errors = error.response.data.errors
           for (const e in errors) {
-            this.error += '<br>' + errors[e].join(', ',)
+            this.error += '<br>' + errors[e].join(', ')
           }
         })
     },
