@@ -38,11 +38,11 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Products</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('products.list') }}">Browse Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Categories</a>
+                            <a class="nav-link" href="{{ route('products.create') }}">Create new product</a>
                         </li>
                     </ul>
                 </div>
