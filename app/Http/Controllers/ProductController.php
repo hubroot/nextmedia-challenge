@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Product;
+use \App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -17,7 +18,13 @@ class ProductController extends Controller
     }
 
     function list() {
-        return view('products.list');
+        $products = Product::orderBy('created_at', 'desc')->get();
+        $categories = Category::orderBy('name')->get();
+
+        return view('products.list')->with([
+            'products' => $products,
+            'categories' => $categories
+        ]);
     }
 
     public function create(Request $request)
