@@ -50,9 +50,9 @@
                       :class="{
                         'fa-sort': orderByField !== col.field,
                         'fa-sort-up':
-                          orderByField === col.field && orderByDir === '',
+                          orderByField === col.field && orderByDir === 'desc',
                         'fa-sort-down':
-                          orderByField === col.field && orderByDir === '-',
+                          orderByField === col.field && orderByDir === 'asc',
                       }"
                     ></i>
                   </th>
@@ -132,7 +132,7 @@ export default {
       totalPages: 0,
       page: 1,
       orderByField: null,
-      orderByDir: '-',
+      orderByDir: 'asc',
       cols: [
         [
           {
@@ -148,12 +148,9 @@ export default {
           },
           {
             title: 'Description',
-            field: 'description',
           },
           {
             title: 'Categories',
-            field: 'categories',
-            sort: true,
           },
           {
             title: 'Price',
@@ -184,11 +181,16 @@ export default {
     },
 
     async orderBy(field) {
-      console.log(field)
-      this.products = this.products.sort(function (a, b) {
-        console.log(a, b)
-        return a[field].localeCompare(b[field])
-      })
+      this.orderByField = field
+      this.orderByDir = this.orderByDir == 'asc' ? 'desc' : 'asc'
+      if (this.orderByDir == 'asc')
+        this.products = this.products.sort((a, b) =>
+          a[field].toString().localeCompare(b[field])
+        )
+      else
+        this.products = this.products.sort((a, b) =>
+          b[field].toString().localeCompare(a[field])
+        )
     },
   },
 }
